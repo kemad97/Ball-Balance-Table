@@ -1,62 +1,76 @@
 # Ball-Balance-Table
-Ball Balance Table Project
-This project is a Ball Balance Table that uses computer vision and motor control to stabilize and navigate a ball on a tilting platform. It combines AVR microcontrollers for motor control and a Raspberry Pi for image processing, ball tracking, and maze solving.
 
-🧠 Project Overview
-A Raspberry Pi captures real-time video to detect the ball’s position.
+A smart ball-balancing system that uses **computer vision** and **motor control** to keep a ball stable—or even solve a maze—on a tilting platform. The system combines **AVR microcontrollers** for real-time motor control and a **Raspberry Pi** for image processing, ball tracking, and pathfinding.
 
-It uses computer vision to track the ball and solve mazes if present.
+---
 
-The Raspberry Pi sends control signals to AVR microcontrollers, each responsible for a DC motor.
+## 🧠 Overview
 
-DC motors tilt the platform in two axes, simulating servo-like behavior to balance or navigate the ball.
+* 📷 A **Raspberry Pi** captures real-time video to detect the ball’s position using **OpenCV**.
+* 🧭 It processes the position and, if in maze mode, solves a path to the goal.
+* 🔁 Control signals are sent via **UART** to **AVR microcontrollers**, each driving a DC motor.
+* ⚙️ The motors tilt the platform in two axes to move or stabilize the ball using a **PID controller**.
 
-🧰 Technologies Used
-🖥️ Raspberry Pi (High-Level Control)
-Python + OpenCV for ball detection and tracking
+---
 
-Maze-solving algorithms
+## 🧰 Technologies Used
 
-UART communication with AVR microcontrollers
+### 🖥️ Raspberry Pi (High-Level Control)
 
-🔧 AVR Microcontrollers (Low-Level Motor Control)
-C for firmware
+* Python & OpenCV for computer vision
+* Maze-solving algorithms
+* UART serial communication with AVRs
 
-PID control logic to act like servos
+### 🔧 AVR Microcontrollers (Low-Level Motor Control)
 
-Direct control of DC motors
+* C for firmware development
+* PID control logic to simulate servo-like motor behavior
+* Direct control of DC motors via H-bridges
 
-⚙️ Hardware
-2 DC motors (X and Y axes)
+### ⚙️ Hardware Components
 
-Camera (USB or PiCamera)
+* 2 DC motors (for X and Y axes)
+* USB or PiCamera module
+* Raspberry Pi (Model 3 or 4 recommended)
+* AVR microcontrollers (e.g., ATmega32)
+* Tiltable platform + ball
 
-Raspberry Pi (Model 3/4 recommended)
+---
 
-AVR microcontrollers (e.g., ATmega32 or similar)
+## 🎥 How It Works
 
-Tilt platform with ball
+1. **Camera** captures video and detects the ball’s coordinates.
+2. **Raspberry Pi** calculates the required tilt using a control or pathfinding algorithm.
+3. **AVR microcontrollers** receive commands over UART and adjust the DC motors using PID control.
+4. In **maze-solving mode**, the Pi plans a path and guides the ball cell by cell toward the goal.
 
-🎥 How It Works
-The camera captures frames and detects the ball’s position.
+---
 
-The Raspberry Pi calculates the required tilt using a control algorithm.
+## 🚀 Getting Started
 
-It sends appropriate movement commands over UART to each AVR board.
+### 🔌 Raspberry Pi Setup
 
-The AVRs run a PID loop to smoothly control the DC motors to the target angles.
+1. Install Python, OpenCV, and required dependencies.
+2. Clone the project and run the `tracking.py` or `maze_solver.py` scripts.
+3. Connect to the AVR boards via UART (TX/RX).
 
-In maze-solving mode, the Pi plans a path and guides the ball step-by-step.
+### ⚙️ AVR Microcontroller Setup
 
-🚀 Getting Started
-Raspberry Pi
-Set up Python and OpenCV
+1. Flash the AVR firmware (`motor_control.c`) using your preferred ISP programmer.
+2. Ensure each AVR handles one axis (X or Y).
+3. Tune PID parameters in the firmware for optimal performance.
 
-Run the ball tracking and maze-solving script
+---
 
-Connect to AVRs via UART (TX/RX)
+## 📷 Demo
 
-AVR Microcontrollers
-Flash the C firmware that receives position commands and drives the motors
+[![Watch the Demo](https://img.youtube.com/vi/VCe8QrZcQyY/0.jpg)](https://youtu.be/VCe8QrZcQyY)
 
-Tune PID parameters for stability
+
+---
+
+## 👤 Author
+
+**Kerolos Emad Eid**
+Passionate about embedded systems, computer vision, and robotics.
+
